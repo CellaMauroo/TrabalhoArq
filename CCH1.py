@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-# Produto
 class Car:
     def __init__(self):
         self.engine = None
@@ -12,7 +11,6 @@ class Car:
         return (f"Car(engine={self.engine}, seats={self.seats}, "
                 f"trip_computer={self.trip_computer}, gps={self.gps})")
 
-# Builder (Interface)
 class CarBuilder(ABC):
     @abstractmethod
     def reset(self):
@@ -64,10 +62,9 @@ class ConcreteCarBuilder(CarBuilder):
 
     def get_result(self):
         car = self._car
-        self.reset()  # Prepara o builder para uma nova construção
+        self.reset()  
         return car
 
-# Director
 class Director:
     def __init__(self, builder: CarBuilder):
         self._builder = builder
@@ -82,7 +79,6 @@ class Director:
         self._builder.set_engine("V6").set_seats(7).set_trip_computer(False).set_gps(True)
         return self._builder.get_result()
 
-# Exemplo de uso
 if __name__ == '__main__':
     builder = ConcreteCarBuilder()
     director = Director(builder)
